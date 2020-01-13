@@ -51,17 +51,12 @@ function setup() {
 
 function draw() {
   clear();
-  //ZOMBIES ARE COMING text
-  fill("red")
-  textAlign(CENTER)
-  textSize(30)
-  textStyle(BOLD)
-  text("ZOMBIES ARE COMING!",width/2+random(-2,+2),50+random(-2,+2)) //fliker the text
 
   //transform angular coordinates to X and Y coordinates
   var you = myMap.latLngToPixel(position.latitude, position.longitude);
   //set the size of the images according to the zoom of the map
-  var size = myMap.zoom()*2;
+  //in a non-linear way
+  var size = myMap.zoom()*sq(myMap.zoom())*0.025;
   //display the user
   image(youImg, you.x, you.y, size, size);
   //move and display the zombies
@@ -73,6 +68,13 @@ function draw() {
     z.display(size);
 
   }
+
+  //ZOMBIES ARE COMING text
+  fill("red")
+  textAlign(CENTER)
+  textSize(80)
+  textStyle(BOLD)
+  text("ZOMBIES\nARE COMING!",width/2+random(-2,+2),100+random(-2,+2)) //fliker the text
 
 }
 
